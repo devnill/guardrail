@@ -1,0 +1,70 @@
+# Guardrail
+
+## What We Are Building
+
+Guardrail is a Claude Code plugin that automates the configuration of permission allowlists and OS-level sandbox settings for development projects. It addresses the friction of constant permission prompts during autonomous agent workflows — particularly in orchestrated multi-agent systems like ideate — by generating tuned, stack-aware configurations that maximize developer productivity while maintaining security against prompt injection and destructive commands.
+
+The plugin provides two skills: `/guardrail init` detects a project's tech stack, presents an interactive configuration menu, and writes a tailored `settings.local.json` with generalized permission rules and sandbox config. `/guardrail audit` analyzes existing permission configurations across both global and local settings, identifies rules that can be consolidated or removed, flags security risks, and offers interactive cleanup.
+
+The design is data-driven: stack definitions, rule modules, and sandbox templates are JSON files that can be extended by dropping new files into the appropriate directory. No plugin code changes are needed to support new tech stacks or permission patterns.
+
+## Key Components
+
+- **Init Skill** (`skills/init/SKILL.md`) — Stack detection, interactive menu, config generation and writing
+- **Audit Skill** (`skills/audit/SKILL.md`) — Rule classification, reporting, and interactive cleanup
+- **Stack Modules** (`stacks/*.json`) — Tech stack definitions with detection patterns, permissions, and sandbox config (6 files: _base, python, node, rust, go, shell)
+- **Rule Modules** (`rules/*.json`) — Cross-cutting permission sets independent of tech stack (5 files: git, web, docker, mcp-ideate, mcp-cyberbrain)
+- **Sandbox Template** (`sandbox/default.json`) — Default sandbox configuration (enabled, auto-allow)
+- **Plugin Manifests** (`.claude-plugin/`) — Plugin identity and marketplace registration
+- **Documentation** (`README.md`, `CLAUDE.md`) — User-facing usage guide and plugin context
+
+## Project Structure
+
+```
+guardrail/
+├── .claude-plugin/
+│   ├── plugin.json
+│   └── marketplace.json
+├── skills/
+│   ├── init/
+│   │   └── SKILL.md
+│   └── audit/
+│       └── SKILL.md
+├── stacks/
+│   ├── _base.json
+│   ├── python.json
+│   ├── node.json
+│   ├── rust.json
+│   ├── go.json
+│   └── shell.json
+├── rules/
+│   ├── git.json
+│   ├── web.json
+│   ├── docker.json
+│   ├── mcp-ideate.json
+│   └── mcp-cyberbrain.json
+├── sandbox/
+│   └── default.json
+├── CLAUDE.md
+└── README.md
+```
+
+## Workflow
+
+### Init Flow
+1. User runs `/guardrail init` in a project directory
+2. Plugin scans project files against stack detection patterns
+3. User sees a menu of detected stacks (pre-selected) and available rule modules
+4. User confirms selections; plugin merges permissions and sandbox config
+5. Plugin writes to `.claude/settings.local.json`, preserving existing non-permission keys
+
+### Audit Flow
+1. User runs `/guardrail audit` in a project directory
+2. Plugin reads both global and local settings
+3. Rules are classified: generalizable, one-off, redundant, risky, or clean
+4. User sees categorized report with recommendations
+5. User chooses fix mode: fix-all, one-by-one, or export-only
+6. Plugin applies confirmed fixes to local settings
+
+### Project Overrides
+Users can customize guardrail's defaults per-project by placing JSON files in `.claude/guardrail/stacks/` and `.claude/guardrail/rules/`. Same-name files replace plugin defaults; new filenames are additive.

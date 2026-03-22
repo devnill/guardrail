@@ -1,0 +1,172 @@
+items:
+  "001":
+    title: "Create plugin manifest and CLAUDE.md"
+    complexity: low
+    scope:
+      - { path: ".claude-plugin/plugin.json", op: create }
+      - { path: ".claude-plugin/marketplace.json", op: create }
+      - { path: "CLAUDE.md", op: create }
+    depends: []
+    blocks: ["010", "011"]
+    criteria:
+      - ".claude-plugin/plugin.json exists and contains valid JSON with name 'guardrail', version '1.0.0', and a skills array with two entries (init, audit)"
+      - ".claude-plugin/marketplace.json exists and contains valid JSON with matching version, repository URL, and plugin entry"
+      - "CLAUDE.md exists and references plugin data paths (stacks/, rules/, sandbox/) and project override path (.claude/guardrail/)"
+      - "Version in plugin.json matches version in marketplace.json"
+    notes: plan/notes/001.md
+
+  "002":
+    title: "Create _base.json stack with universal defaults and deny list"
+    complexity: medium
+    scope:
+      - { path: "stacks/_base.json", op: create }
+    depends: []
+    blocks: ["007", "008"]
+    criteria:
+      - "stacks/_base.json exists and contains valid JSON conforming to StackModule schema"
+      - "detect.files is ['*'] with detect.match 'any'"
+      - "permissions.allow contains at least: ls, cat, head, tail, wc, find, grep, echo, which, mkdir, cp, mv, touch, chmod, diff, sort, uniq, xargs, tr, cut, tee, date, pwd, basename, dirname, realpath, env (all as Bash(cmd:*) format)"
+      - "permissions.allow contains 'Read' (unqualified, allows all file reads)"
+      - "permissions.deny contains at least: rm -rf /, rm -rf ~, sudo, curl piped to sh, wget piped to sh"
+      - "permissions.deny contains: Edit(//.env), Edit(//.*credentials*), Edit(//.ssh/**)"
+      - "sandbox.filesystem.allowWrite is ['.'] and sandbox.filesystem.denyWrite is ['/.git']"
+    notes: plan/notes/002.md
+
+  "003":
+    title: "Create python.json stack"
+    complexity: low
+    scope:
+      - { path: "stacks/python.json", op: create }
+    depends: []
+    blocks: ["007", "008"]
+    criteria:
+      - "stacks/python.json exists and contains valid JSON conforming to StackModule schema"
+      - "detect.files includes requirements.txt, pyproject.toml, setup.py, Pipfile, and *.py"
+      - "detect.match is 'any'"
+      - "permissions.allow includes at least: python3, python, pip3, pip, pytest, mypy, ruff, black, isort, poetry, pdm, uv"
+      - "sandbox.network.allowedDomains includes pypi.org and files.pythonhosted.org"
+    notes: plan/notes/003.md
+
+  "004":
+    title: "Create node.json, rust.json, go.json, shell.json stacks"
+    complexity: low
+    scope:
+      - { path: "stacks/node.json", op: create }
+      - { path: "stacks/rust.json", op: create }
+      - { path: "stacks/go.json", op: create }
+      - { path: "stacks/shell.json", op: create }
+    depends: []
+    blocks: ["007", "008"]
+    criteria:
+      - "All four stack JSON files exist and conform to StackModule schema"
+      - "node.json detects package.json, tsconfig.json, *.js, *.ts; allows node, npm, npx, yarn, pnpm, jest, vitest, eslint, prettier, tsc; network includes registry.npmjs.org"
+      - "rust.json detects Cargo.toml, *.rs; allows cargo, rustc, rustup, clippy, rustfmt; network includes crates.io, static.crates.io"
+      - "go.json detects go.mod, go.sum, *.go; allows go, gofmt, golint, golangci-lint; network includes proxy.golang.org, sum.golang.org"
+      - "shell.json detects Makefile, *.sh, justfile; allows make, just, bash, sh, shellcheck"
+    notes: plan/notes/004.md
+
+  "005":
+    title: "Create rule modules (git, web, docker, mcp-ideate, mcp-cyberbrain)"
+    complexity: low
+    scope:
+      - { path: "rules/git.json", op: create }
+      - { path: "rules/web.json", op: create }
+      - { path: "rules/docker.json", op: create }
+      - { path: "rules/mcp-ideate.json", op: create }
+      - { path: "rules/mcp-cyberbrain.json", op: create }
+    depends: []
+    blocks: ["007", "008"]
+    criteria:
+      - "All five rule JSON files exist and conform to RuleModule schema"
+      - "git.json allows Bash(git:*) and denies Bash(git push --force:*) and Bash(git reset --hard:*)"
+      - "web.json allows WebSearch and WebFetch for docs.anthropic.com, github.com, stackoverflow.com"
+      - "docker.json allows Bash(docker:*), Bash(docker-compose:*), Bash(docker compose:*) and denies Bash(docker run --privileged:*)"
+      - "mcp-ideate.json has auto:true and allows mcp__plugin_ideate_ideate-artifact-server__*"
+      - "mcp-cyberbrain.json has auto:true and allows mcp__plugin_cyberbrain_cyberbrain__*"
+    notes: plan/notes/005.md
+
+  "006":
+    title: "Create sandbox default template"
+    complexity: low
+    scope:
+      - { path: "sandbox/default.json", op: create }
+    depends: []
+    blocks: ["007"]
+    criteria:
+      - "sandbox/default.json exists and contains valid JSON conforming to SandboxTemplate schema"
+      - "enabled is true"
+      - "filesystem.allowWrite is ['.']"
+      - "filesystem.denyWrite is ['/.git']"
+      - "network.allowedDomains is [] (empty array, populated by stack merging)"
+    notes: plan/notes/006.md
+
+  "007":
+    title: "Create init skill"
+    complexity: high
+    scope:
+      - { path: "skills/init/SKILL.md", op: create }
+    depends: ["002", "003", "004", "005", "006"]
+    blocks: ["009", "010"]
+    criteria:
+      - "skills/init/SKILL.md exists with YAML frontmatter containing description, user-invocable: true, and argument-hint"
+      - "Skill instructs Claude to read all JSON files from ${CLAUDE_PLUGIN_ROOT}/stacks/ and .claude/guardrail/stacks/"
+      - "Skill instructs Claude to glob project files against each stack's detect.files patterns"
+      - "Skill instructs Claude to present an interactive menu with detected stacks pre-selected, undetected stacks available, rule modules listed, and sandbox toggle"
+      - "Skill instructs Claude to merge: _base first, then selected stacks, then selected rules; union+dedup allow and deny arrays; merge sandbox configs"
+      - "Skill instructs Claude to check git repo (git rev-parse --git-dir) to determine write location"
+      - "Skill instructs Claude to read existing settings.local.json if present, show diff, offer merge or replace"
+      - "Skill instructs Claude to only write permissions and sandbox keys, preserving all other keys"
+      - "Skill instructs Claude to get explicit confirmation before writing"
+      - "Project override files with same name as plugin files replace entirely (no deep merge)"
+    notes: plan/notes/007.md
+
+  "008":
+    title: "Create audit skill"
+    complexity: high
+    scope:
+      - { path: "skills/audit/SKILL.md", op: create }
+    depends: ["002", "003", "004", "005"]
+    blocks: ["010"]
+    criteria:
+      - "skills/audit/SKILL.md exists with YAML frontmatter containing description, user-invocable: true"
+      - "Skill instructs Claude to read both ~/.claude/settings.json and .claude/settings.local.json"
+      - "Skill instructs Claude to read stack and rule JSONs to build a reference set of known patterns"
+      - "Skill classifies rules into five categories: generalizable, one-off, redundant, risky, clean"
+      - "Skill uses prefix-based generalization: 3+ rules sharing a prefix suggest consolidation"
+      - "Skill maintains a safety deny list of commands that must never be wildcarded: rm, sudo, curl, wget, chmod, chown, kill, pkill"
+      - "Skill presents global findings in a separate informational section (read-only, no fixes)"
+      - "Skill offers three fix modes: fix-all, fix-one-by-one, export-only"
+      - "Skill never modifies global settings"
+      - "Skill requires explicit confirmation before writing any changes"
+    notes: plan/notes/008.md
+
+  "009":
+    title: "Create README.md"
+    complexity: medium
+    scope:
+      - { path: "README.md", op: create }
+    depends: ["007", "008"]
+    blocks: ["010"]
+    criteria:
+      - "README.md exists with sections: Overview, Quick Start, Skills (init and audit), Included Stacks (table), Included Rules (table), Customization, How It Works, FAQ"
+      - "Quick Start section shows install + init in 3 steps or fewer"
+      - "Skills section describes both /guardrail init and /guardrail audit with example interactions"
+      - "Included Stacks table lists all 6 stacks with detection files and what they allow"
+      - "Included Rules table lists all 5 rule modules with descriptions"
+      - "Customization section explains .claude/guardrail/ override mechanism with same-name replacement semantics"
+      - "Key knowledge section explains: sandbox auto-allow, deny-always-wins semantics, global vs local settings interaction"
+    notes: plan/notes/009.md
+
+  "010":
+    title: "Register plugin in claude-marketplace"
+    complexity: low
+    scope:
+      - { path: ".claude-plugin/marketplace.json", op: modify }
+    depends: ["001", "007", "008", "009"]
+    blocks: []
+    criteria:
+      - "marketplace.json contains correct repository URL for the guardrail repo"
+      - "Plugin entry in claude-marketplace registry includes guardrail with source pointing to the guardrail repo"
+      - "Version matches plugin.json"
+      - "Description accurately reflects the plugin's functionality"
+    notes: plan/notes/010.md

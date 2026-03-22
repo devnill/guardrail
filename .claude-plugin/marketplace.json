@@ -1,0 +1,18 @@
+{
+  "name": "guardrail-marketplace",
+  "owner": {
+    "name": "Dan Singer"
+  },
+  "metadata": {
+    "description": "Guardrail plugin marketplace",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "guardrail",
+      "source": "./",
+      "description": "Automates permission allowlists and sandbox configuration for Claude Code projects",
+      "version": "1.0.0"
+    }
+  ]
+}

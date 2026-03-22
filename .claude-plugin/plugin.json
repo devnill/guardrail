@@ -1,0 +1,21 @@
+{
+  "name": "guardrail",
+  "version": "1.0.0",
+  "description": "Automates permission allowlists and sandbox configuration for Claude Code projects",
+  "author": {
+    "name": "Dan Singer"
+  },
+  "license": "MIT",
+  "skills": [
+    {
+      "name": "init",
+      "path": "skills/init/SKILL.md",
+      "description": "Detect project stacks and generate tuned permission + sandbox config"
+    },
+    {
+      "name": "audit",
+      "path": "skills/audit/SKILL.md",
+      "description": "Analyze existing permission rules, find consolidations and risks"
+    }
+  ]
+}

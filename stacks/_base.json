@@ -1,0 +1,63 @@
+{
+  "name": "_base",
+  "description": "Universal foundation stack included for all projects. Provides safe default allow rules for read-only and non-destructive CLI tools, and a safety deny list blocking known-dangerous command patterns.",
+  "detect": {
+    "files": ["*"],
+    "match": "any"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(echo:*)",
+      "Bash(which:*)",
+      "Bash(pwd:*)",
+      "Bash(date:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(touch:*)",
+      "Bash(chmod:*)",
+      "Bash(diff:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(xargs:*)",
+      "Bash(tr:*)",
+      "Bash(cut:*)",
+      "Bash(tee:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(basename:*)",
+      "Bash(dirname:*)",
+      "Bash(realpath:*)",
+      "Bash(env:*)",
+      "Bash(export:*)",
+      "Bash(printenv:*)",
+      "Read"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf /*:*)",
+      "Bash(sudo:*)",
+      "Bash(curl * | sh:*)",
+      "Bash(curl * | bash:*)",
+      "Bash(wget * | sh:*)",
+      "Bash(wget * | bash:*)",
+      "Edit(//.env)",
+      "Edit(//.*credentials*)",
+      "Edit(//.ssh/**)"
+    ]
+  },
+  "sandbox": {
+    "filesystem": {
+      "allowWrite": ["."],
+      "denyWrite": ["/.git"]
+    }
+  }
+}

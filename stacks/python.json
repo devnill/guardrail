@@ -1,0 +1,51 @@
+{
+  "name": "python",
+  "description": "Python stack detection and permissions for Python interpreters, package managers, test runners, linters, formatters, and build tools.",
+  "detect": {
+    "files": [
+      "requirements.txt",
+      "pyproject.toml",
+      "setup.py",
+      "setup.cfg",
+      "Pipfile",
+      "*.py",
+      "poetry.lock",
+      "uv.lock"
+    ],
+    "match": "any"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(tool:python3)",
+      "Bash(tool:python)",
+      "Bash(tool:pip3)",
+      "Bash(tool:pip)",
+      "Bash(tool:poetry)",
+      "Bash(tool:pdm)",
+      "Bash(tool:uv)",
+      "Bash(tool:pipx)",
+      "Bash(tool:pytest)",
+      "Bash(tool:tox)",
+      "Bash(tool:nox)",
+      "Bash(tool:mypy)",
+      "Bash(tool:ruff)",
+      "Bash(tool:black)",
+      "Bash(tool:isort)",
+      "Bash(tool:flake8)",
+      "Bash(tool:pylint)",
+      "Bash(tool:setuptools)",
+      "Bash(tool:build)",
+      "Bash(tool:twine)",
+      "Bash(tool:venv)",
+      "Bash(tool:virtualenv)"
+    ]
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "pypi.org",
+        "files.pythonhosted.org"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "node",
+  "description": "Node.js and TypeScript stack. Detects JavaScript/TypeScript projects and allows common Node ecosystem tools including package managers, bundlers, test runners, and linters.",
+  "detect": {
+    "files": ["package.json", "tsconfig.json", "*.js", "*.ts", "*.jsx", "*.tsx", "yarn.lock", "pnpm-lock.yaml"],
+    "match": "any"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(yarn:*)",
+      "Bash(pnpm:*)",
+      "Bash(jest:*)",
+      "Bash(vitest:*)",
+      "Bash(eslint:*)",
+      "Bash(prettier:*)",
+      "Bash(tsc:*)",
+      "Bash(tsx:*)",
+      "Bash(next:*)",
+      "Bash(vite:*)",
+      "Bash(webpack:*)",
+      "Bash(esbuild:*)",
+      "Bash(turbo:*)"
+    ]
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": ["registry.npmjs.org", "registry.yarnpkg.com"]
+    }
+  }
+}

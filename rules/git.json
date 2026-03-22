@@ -1,0 +1,14 @@
+{
+  "name": "git",
+  "description": "Git version control operations",
+  "permissions": {
+    "allow": ["Bash(git:*)"],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -f:*)",
+      "Bash(git checkout -- .:*)"
+    ]
+  }
+}

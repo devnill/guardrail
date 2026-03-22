@@ -1,0 +1,42 @@
+# Research: Claude Code Permission System
+
+## Date: 2026-03-22
+
+## Question
+What are the full capabilities of Claude Code's permission system, sandboxing, and hooks?
+
+## Findings
+
+### Permission Modes
+| Mode | Behavior |
+|------|----------|
+| `default` | Prompts on first use, saves approval |
+| `acceptEdits` | Auto-approves file edits, prompts for Bash/WebFetch |
+| `plan` | Read-only, no execution or edits |
+| `dontAsk` | Deny by default, only pre-approved tools work |
+| `bypassPermissions` | No prompts except writes to .git/.claude/.vscode/.idea |
+
+### Permission Rule Syntax
+- `Bash(command:*)` — glob wildcard, space before `*` enforces word boundary
+- `Read(//absolute/path/**)` — gitignore-style, `//` = absolute, `/` = project root, bare = cwd
+- `WebFetch(domain:example.com)` — domain-scoped
+- `mcp__server__tool` — MCP tool allowlisting, supports `*` wildcard
+- Shell operators parsed — `Bash(safe:*)` won't match `safe && malicious`
+
+### Sandboxing
+- macOS: Seatbelt (built-in)
+- Linux: bubblewrap + socat (must be installed)
+- Applies only to Bash and child processes, NOT to Read/Edit/Write tools
+- Filesystem: `allowWrite`, `denyWrite` arrays
+- Network: `allowedDomains` array, proxy-based filtering
+- Auto-allow mode: sandboxed Bash commands auto-approve without prompts
+- Limitations: doesn't inspect encrypted traffic, domain fronting possible, unix socket access can enable escape
+
+### Hooks for Permission Gating
+- `PreToolUse` can return `permissionDecision: "allow"|"deny"|"ask"`
+- `PermissionRequest` can return `decision.behavior: "allow"|"deny"|"ask"`
+- Deny rules from settings ALWAYS take precedence over hook allow decisions
+- Exit code 2 = block with stderr as reason
+
+### Key Interaction: Deny Always Wins
+Deny rules from any settings scope override allow rules. This is important for guardrail's security model — deny rules are the safety net that can't be bypassed by allow rules or hooks.

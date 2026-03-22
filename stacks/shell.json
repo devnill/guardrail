@@ -1,0 +1,18 @@
+{
+  "name": "shell",
+  "description": "Shell and task-runner stack. Detects projects using Makefiles, shell scripts, and task runners. Allows common shell tools, linters, and formatters.",
+  "detect": {
+    "files": ["Makefile", "*.sh", "justfile", "Taskfile.yml"],
+    "match": "any"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(make:*)",
+      "Bash(just:*)",
+      "Bash(bash:*)",
+      "Bash(sh:*)",
+      "Bash(shellcheck:*)",
+      "Bash(shfmt:*)"
+    ]
+  }
+}

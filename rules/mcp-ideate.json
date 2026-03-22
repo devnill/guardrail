@@ -1,0 +1,8 @@
+{
+  "name": "mcp-ideate",
+  "description": "Ideate plugin MCP tool permissions",
+  "auto": true,
+  "permissions": {
+    "allow": ["mcp__plugin_ideate_ideate-artifact-server__*"]
+  }
+}

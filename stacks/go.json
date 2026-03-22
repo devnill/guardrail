@@ -1,0 +1,23 @@
+{
+  "name": "go",
+  "description": "Go stack. Detects Go projects and allows common Go toolchain commands including the compiler, formatters, linters, and static analysis tools.",
+  "detect": {
+    "files": ["go.mod", "go.sum", "*.go"],
+    "match": "any"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(go:*)",
+      "Bash(gofmt:*)",
+      "Bash(goimports:*)",
+      "Bash(golint:*)",
+      "Bash(golangci-lint:*)",
+      "Bash(staticcheck:*)"
+    ]
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": ["proxy.golang.org", "sum.golang.org"]
+    }
+  }
+}

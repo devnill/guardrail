@@ -1,0 +1,24 @@
+{
+  "name": "rust",
+  "description": "Rust stack. Detects Rust projects and allows common Rust toolchain commands including cargo, rustc, formatting, linting, and test runners.",
+  "detect": {
+    "files": ["Cargo.toml", "Cargo.lock", "*.rs"],
+    "match": "any"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(cargo:*)",
+      "Bash(rustc:*)",
+      "Bash(rustup:*)",
+      "Bash(clippy:*)",
+      "Bash(rustfmt:*)",
+      "Bash(cargo-watch:*)",
+      "Bash(cargo-nextest:*)"
+    ]
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": ["crates.io", "static.crates.io"]
+    }
+  }
+}

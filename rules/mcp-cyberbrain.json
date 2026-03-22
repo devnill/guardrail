@@ -1,0 +1,8 @@
+{
+  "name": "mcp-cyberbrain",
+  "description": "Cyberbrain plugin MCP tool permissions",
+  "auto": true,
+  "permissions": {
+    "allow": ["mcp__plugin_cyberbrain_cyberbrain__*"]
+  }
+}

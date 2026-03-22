@@ -1,0 +1,23 @@
+# Constraints
+
+## Technology Constraints
+1. **Claude Code plugin format.** Must follow the established plugin structure: `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, skills in `skills/`, using `${CLAUDE_PLUGIN_ROOT}` for self-referencing paths.
+2. **No runtime dependencies beyond Claude Code.** Stack detection, rule merging, and audit classification are performed inline by the skill using Claude Code's built-in tools (Glob, Read, Write, Edit). No external scripts, binaries, or interpreters required.
+3. **macOS primary target.** Sandbox configuration uses Seatbelt. Linux (bubblewrap) is a secondary target. Windows/WSL1 not supported for sandboxing.
+
+## Design Constraints
+4. **JSON data files for stacks and rules.** All stack definitions and rule modules are JSON files following a defined schema. The skill logic is generic; domain knowledge lives in the data.
+5. **Project-scoped overrides in `.claude/guardrail/`.** Custom stacks and rules live in `.claude/guardrail/stacks/` and `.claude/guardrail/rules/`. Discovery uses upward directory tree walking from cwd.
+6. **Plugin-scoped defaults in `${CLAUDE_PLUGIN_ROOT}/`.** Default stacks, rules, sandbox templates, and deny lists ship with the plugin.
+7. **Settings output targets `.claude/settings.local.json`.** Init writes only `permissions` and `sandbox` keys. All other keys in the file are preserved.
+8. **Git repo detection determines write location.** In a git repo, write to project root's `.claude/settings.local.json`. Outside a git repo, confirm location with user (default: cwd).
+
+## Process Constraints
+9. **Distributed via claude-marketplace.** Plugin must be registered in the marketplace with proper `marketplace.json` and `plugin.json` manifests.
+10. **Two skills in v1 scope.** `/guardrail init` and `/guardrail audit`. Policy hook engine is deferred to v2.
+11. **Interactive confirmation required.** Init presents a menu for stack/rule selection before writing. Audit presents findings and offers fix-all, fix-one-by-one, or export-only modes. No silent writes.
+
+## Scope Constraints
+12. **No hook-based policy engine in v1.** The `scripts/` directory and policy gate functionality are out of scope.
+13. **No global settings management in v1.** Init writes project-scoped settings only. Audit reads global settings for analysis but does not propose modifications to global settings (it reports what it finds).
+14. **No permission analytics or runtime monitoring.** Guardrail is a configuration tool, not a runtime agent.
