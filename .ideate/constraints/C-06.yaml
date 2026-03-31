@@ -1,0 +1,10 @@
+id: C-06
+type: constraint
+category: design
+status: active
+description: Plugin-scoped defaults in `${CLAUDE_PLUGIN_ROOT}/`. Default stacks, rules, sandbox templates, and deny lists ship with the plugin.
+cycle_created: 1
+cycle_modified: null
+content_hash: dac1a9bb2fbf5b0ee6952605b82e4261282a2f0e2e9b0dbb5d18d6d3665dfd59
+token_count: 75
+file_path: .ideate/constraints/C-06.yaml

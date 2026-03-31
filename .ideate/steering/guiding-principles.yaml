@@ -1,0 +1,31 @@
+id: guiding-principles
+type: guiding_principles
+title: Guiding Principles
+content: |
+  # Guiding Principles
+  
+  ## 1. Maximize Autonomy Within Safety Boundaries
+  The primary goal is reducing permission prompts by 80%+ while maintaining security against prompt injection and destructive commands. When a design decision involves a tradeoff between convenience and safety, prefer the option that achieves both — sandbox enforcement over permission prompts, generalized allowlists over specific ones. Only sacrifice convenience when there is no safe alternative.
+  
+  ## 2. Data-Driven, Not Code-Driven
+  Stack definitions, rule modules, and deny lists are JSON data files. Adding support for a new stack or rule set means adding a new JSON file, not modifying plugin logic. The skill reads and interprets data; it does not encode detection or classification logic in its own markdown. This keeps the system extensible without forking.
+  
+  ## 3. Never Clobber Without Permission
+  Guardrail never silently overwrites existing configuration. When conflicts exist between generated and existing settings, the user is asked. When writing to `settings.local.json`, only the `permissions` and `sandbox` keys are touched — all other keys are preserved. Destructive changes require explicit confirmation.
+  
+  ## 4. Smart Suggestions Over Dumb Lists
+  Guardrail's value is not in maintaining a list of allowed commands — it's in making intelligent recommendations. Audit doesn't just flag problems; it suggests consolidations. Init doesn't dump a generic config; it detects the stack and tailors the output. The plugin should surface the "why" behind each recommendation so users can make informed decisions.
+  
+  ## 5. Defense in Depth
+  Security comes from layered enforcement: OS-level sandboxing (Seatbelt/bubblewrap) as the foundation, deny rules as the safety net, and generalized allow rules as the convenience layer. No single layer is relied upon exclusively. If sandboxing is unavailable on the platform, the plugin warns and compensates with tighter permission rules.
+  
+  ## 6. Composable and Extensible
+  Multiple stacks and rule modules combine additively. Users can add custom modules in `.claude/guardrail/stacks/` and `.claude/guardrail/rules/` without touching the plugin. Third-party rule sets should work by dropping JSON files into the right directory.
+  
+  ## 7. Audit the Effective Ruleset
+  Permission behavior is determined by the combination of global settings, local settings, and sandbox config. Audit must analyze all three as a combined effective ruleset, not just the local file in isolation. Recommendations specify which file to modify and why.
+  
+  ## 8. Iterate, Don't Perfect
+  V1 ships with best-effort deny lists and common stack definitions. The plugin will be adversarially tested and refined. Design for iteration: make it easy to add stacks, update deny lists, and adjust defaults without structural changes.
+content_hash: c92ec30f02394484085f2332c4cc7bed3023bb8000bc206df79ffb7c55201b1f
+token_count: 732

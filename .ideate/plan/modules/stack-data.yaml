@@ -1,0 +1,33 @@
+id: module_spec-stack-data
+type: module_spec
+name: stack-data
+scope: |
+  Owns all files in `stacks/` — the JSON data files that define tech stack detection patterns, permission rules, and sandbox configurations.
+  
+  Files:
+  - `stacks/_base.json` — Universal safe defaults, always included
+  - `stacks/python.json` — Python development stack
+  - `stacks/node.json` — Node.js/TypeScript stack
+  - `stacks/rust.json` — Rust stack
+  - `stacks/go.json` — Go stack
+  - `stacks/shell.json` — Shell/Make stack
+  
+  NOT responsible for: rule modules (`rules/`), sandbox template (`sandbox/`), skill logic, plugin registration.
+provides:
+  - "**StackModule JSON files** — Each file conforms to the StackModule schema and provides:"
+  - - `name` and `description` for display
+  - - `detect.files` glob patterns and `detect.match` mode for stack detection
+  - - `permissions.allow` and optional `permissions.deny` arrays
+  - - Optional `sandbox.filesystem` and `sandbox.network` overrides
+requires:
+  - Nothing. Stack data files are leaf nodes with no dependencies on other modules.
+boundary_rules:
+  - Every stack JSON file must conform to the StackModule schema exactly.
+  - "`_base.json` must always be present. It is the foundation that other stacks build on."
+  - "`_base.json` must include the safety deny list (rm -rf, sudo, curl|sh, etc.)."
+  - Detection patterns must use glob syntax compatible with Claude Code's Glob tool.
+  - "Permission rule strings must use Claude Code's permission syntax (`Bash(command:*)`, `Read`, `WebFetch(domain:x)`, etc.)."
+  - Stack files must not reference other stack files. Each is self-contained.
+  - No executable logic — these are pure data files.
+content_hash: cae2ffa569fe8e1e70fee33b3ddf93bf45850c97afb02222092f3b78ddd2470d
+token_count: 414

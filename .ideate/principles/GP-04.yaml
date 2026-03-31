@@ -1,0 +1,11 @@
+id: GP-04
+type: guiding_principle
+name: Smart Suggestions Over Dumb Lists
+status: active
+description: Guardrail's value is not in maintaining a list of allowed commands — it's in making intelligent recommendations. Audit doesn't just flag problems; it suggests consolidations. Init doesn't dump a generic config; it detects the stack and tailors the output. The plugin should surface the "why" behind each recommendation so users can make informed decisions.
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: "4d37aa3e75d5b4f38d78fa56355f45afefc9b551b5030b76222d391d26df77ce"
+token_count: 146
+file_path: .ideate/principles/GP-04.yaml

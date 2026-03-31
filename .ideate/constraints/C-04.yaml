@@ -1,0 +1,10 @@
+id: C-04
+type: constraint
+category: design
+status: active
+description: JSON data files for stacks and rules. All stack definitions and rule modules are JSON files following a defined schema. The skill logic is generic; domain knowledge lives in the data.
+cycle_created: 1
+cycle_modified: null
+content_hash: "1765199bd63b2eac39e1f841a65e5838d058d6b2a773e8278d1c87c69c329a7a"
+token_count: 88
+file_path: .ideate/constraints/C-04.yaml

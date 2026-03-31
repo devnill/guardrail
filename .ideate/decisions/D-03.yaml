@@ -1,0 +1,13 @@
+id: D-03
+type: domain_decision
+domain: permissions
+status: settled
+cycle: 1
+supersedes: null
+description: Audit analyzes the combined effective ruleset (global + local) but only proposes fixes to local settings
+rationale: Global settings affect all projects; modifying them has high blast radius and should be a deliberate user action, not an automated suggestion
+cycle_created: 1
+cycle_modified: null
+content_hash: f1046e89592155b4bda779335fa38c5433a268fb740ac8d68e0c4c10e58eaf7b
+token_count: 116
+file_path: .ideate/decisions/D-03.yaml

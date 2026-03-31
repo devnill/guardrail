@@ -1,0 +1,116 @@
+id: WI-005
+type: work_item
+title: Create rule modules (git, web, docker, mcp-ideate, mcp-cyberbrain)
+status: pending
+complexity: low
+scope: []
+depends: []
+blocks:
+  - "007"
+  - "008"
+criteria:
+  - All five rule JSON files exist and conform to RuleModule schema
+  - "git.json allows Bash(git:*) and denies Bash(git push --force:*) and Bash(git reset --hard:*)"
+  - web.json allows WebSearch and WebFetch for docs.anthropic.com, github.com, stackoverflow.com
+  - "docker.json allows Bash(docker:*), Bash(docker-compose:*), Bash(docker compose:*) and denies Bash(docker run --privileged:*)"
+  - "mcp-ideate.json has auto:true and allows mcp__plugin_ideate_ideate-artifact-server__*"
+  - "mcp-cyberbrain.json has auto:true and allows mcp__plugin_cyberbrain_cyberbrain__*"
+module: null
+domain: null
+notes: |
+  # 005: Create rule modules (git, web, docker, mcp-ideate, mcp-cyberbrain)
+  
+  ## Implementation Notes
+  
+  ### git.json
+  
+  ```json
+  {
+    "name": "git",
+    "description": "Git version control operations",
+    "permissions": {
+      "allow": ["Bash(git:*)"],
+      "deny": [
+        "Bash(git push --force:*)",
+        "Bash(git push -f:*)",
+        "Bash(git reset --hard:*)",
+        "Bash(git clean -f:*)",
+        "Bash(git checkout -- .:*)"
+      ]
+    }
+  }
+  ```
+  
+  Note: `Bash(git:*)` is broad. The deny rules are critical safety nets for destructive git operations. Claude Code's deny-always-wins semantics ensure these cannot be bypassed by the allow rule.
+  
+  ### web.json
+  
+  ```json
+  {
+    "name": "web",
+    "description": "Web search and documentation fetching",
+    "permissions": {
+      "allow": [
+        "WebSearch",
+        "WebFetch(domain:docs.anthropic.com)",
+        "WebFetch(domain:github.com)",
+        "WebFetch(domain:stackoverflow.com)",
+        "WebFetch(domain:developer.mozilla.org)"
+      ]
+    }
+  }
+  ```
+  
+  ### docker.json
+  
+  ```json
+  {
+    "name": "docker",
+    "description": "Docker and container operations",
+    "permissions": {
+      "allow": [
+        "Bash(docker:*)",
+        "Bash(docker-compose:*)",
+        "Bash(docker compose:*)"
+      ],
+      "deny": [
+        "Bash(docker run --privileged:*)"
+      ]
+    }
+  }
+  ```
+  
+  ### mcp-ideate.json
+  
+  ```json
+  {
+    "name": "mcp-ideate",
+    "description": "Ideate plugin MCP tool permissions",
+    "auto": true,
+    "permissions": {
+      "allow": ["mcp__plugin_ideate_ideate-artifact-server__*"]
+    }
+  }
+  ```
+  
+  ### mcp-cyberbrain.json
+  
+  ```json
+  {
+    "name": "mcp-cyberbrain",
+    "description": "Cyberbrain plugin MCP tool permissions",
+    "auto": true,
+    "permissions": {
+      "allow": ["mcp__plugin_cyberbrain_cyberbrain__*"]
+    }
+  }
+  ```
+  
+  ### auto flag behavior
+  
+  When `auto: true`, the init skill includes this rule module without presenting it in the selection menu. The user does not need to opt in. This is appropriate for MCP tool permissions that only matter when the corresponding plugin is installed — including them has no effect if the plugin isn't present, and saves a menu step.
+cycle_created: 1
+cycle_modified: null
+content_hash: "2be5ea8df8a17c7f20dfb4976f6936987ba8c39c6d4dbef71ad19c5ffa023e13"
+token_count: 784
+file_path: .ideate/work-items/WI-005.yaml

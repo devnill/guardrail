@@ -1,0 +1,9 @@
+id: J-000-008
+type: journal_entry
+phase: execute
+date: "2026-03-22"
+cycle_created: 0
+title: "Work item 006: Create sandbox default template"
+content: "Status: complete"
+content_hash: b9367c1aaba34613657f0ac66498264b525990429c4289ec946aa54c0f2517b3
+token_count: 45

@@ -1,0 +1,17 @@
+id: interviews/plan/_general
+type: interview
+cycle: null
+source_path: steering/interviews/plan/_general.md
+entries:
+  - {id: IQ-000-001, question: Stack detection mechanism — shell script or inline?, answer: "Inline detection using Glob against JSON-defined patterns. No shell script. JSON files are the single source of truth.
+
+<!-- domains: plugin-system -->", domain: null, seq: 1}
+  - {id: IQ-000-002, question: Plugin distribution?, answer: "Add to claude-marketplace registry from the start.
+
+<!-- domains: permissions, sandbox -->", domain: null, seq: 2}
+  - {id: IQ-000-003, question: Testing strategy?, answer: "Test by running init on existing projects and comparing output against accumulated settings.local.json files.
+
+<!-- domains: permissions, plugin-system -->", domain: null, seq: 3}
+  - {id: IQ-000-004, question: README?, answer: Include a README highlighting usage, key knowledge users should have, and important details., domain: null, seq: 4}
+content_hash: "45d5e4b0bf3c0827dbc4ca8686c743ea8b3d9ea8668fac8dbcbb9380b028ca2a"
+token_count: 247

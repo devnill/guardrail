@@ -1,0 +1,14 @@
+id: P-03
+type: domain_policy
+domain: sandbox
+status: active
+derived_from:
+  - GP-6 (Composable and Extensible)
+established: planning phase
+amended: null
+description: The sandbox template starts with empty `allowedDomains`. Each selected stack contributes its package registry domains. No stack can remove domains added by another stack.
+cycle_created: 1
+cycle_modified: null
+content_hash: "7684814083e6917c267fbdb37a4aca64c23019516e03a175f9160bd04bf46e28"
+token_count: 109
+file_path: .ideate/policies/P-03.yaml

@@ -1,0 +1,10 @@
+id: C-05
+type: constraint
+category: design
+status: active
+description: Project-scoped overrides in `.claude/guardrail/`. Custom stacks and rules live in `.claude/guardrail/stacks/` and `.claude/guardrail/rules/`. Discovery uses upward directory tree walking from cwd.
+cycle_created: 1
+cycle_modified: null
+content_hash: f113bb782bf45406c7e13ec45d02962db6d969d47f772ad2559062e7642e84ce
+token_count: 92
+file_path: .ideate/constraints/C-05.yaml

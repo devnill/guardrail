@@ -1,0 +1,10 @@
+id: C-13
+type: constraint
+category: scope
+status: active
+description: No global settings management in v1. Init writes project-scoped settings only. Audit reads global settings for analysis but does not propose modifications to global settings (it reports what it finds).
+cycle_created: 1
+cycle_modified: null
+content_hash: "7aa5dad2d746635355211fdc4aaf1e812416db16c85bd0c29650e7fcd8e43d6e"
+token_count: 93
+file_path: .ideate/constraints/C-13.yaml

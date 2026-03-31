@@ -1,0 +1,10 @@
+id: C-10
+type: constraint
+category: process
+status: active
+description: Two skills in v1 scope. `/guardrail init` and `/guardrail audit`. Policy hook engine is deferred to v2.
+cycle_created: 1
+cycle_modified: null
+content_hash: "0052cb04a42021a53ce9766cb72b92a0e5c48e126eee0aa762f8bc2ff76dfd3c"
+token_count: 69
+file_path: .ideate/constraints/C-10.yaml

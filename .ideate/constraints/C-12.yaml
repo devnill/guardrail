@@ -1,0 +1,10 @@
+id: C-12
+type: constraint
+category: scope
+status: active
+description: No hook-based policy engine in v1. The `scripts/` directory and policy gate functionality are out of scope.
+cycle_created: 1
+cycle_modified: null
+content_hash: "808042c1c2b9eba5eb7ee4fad0b9bb9933ae1e9cb9bcf6cb94fbb3bfedf0853a"
+token_count: 69
+file_path: .ideate/constraints/C-12.yaml

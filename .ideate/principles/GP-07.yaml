@@ -1,0 +1,11 @@
+id: GP-07
+type: guiding_principle
+name: Audit the Effective Ruleset
+status: active
+description: Permission behavior is determined by the combination of global settings, local settings, and sandbox config. Audit must analyze all three as a combined effective ruleset, not just the local file in isolation. Recommendations specify which file to modify and why.
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: a81d904362cb896ab3ce4b07a075fe4bcc2f92c463451eec2c481f553bf3802b
+token_count: 120
+file_path: .ideate/principles/GP-07.yaml

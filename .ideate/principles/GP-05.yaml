@@ -1,0 +1,11 @@
+id: GP-05
+type: guiding_principle
+name: Defense in Depth
+status: active
+description: "Security comes from layered enforcement: OS-level sandboxing (Seatbelt/bubblewrap) as the foundation, deny rules as the safety net, and generalized allow rules as the convenience layer. No single layer is relied upon exclusively. If sandboxing is unavailable on the platform, the plugin warns and compensates with tighter permission rules."
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: "083773fbccdd34ea477eb9e1803f341c17c11cdfe0026659f2a33ddfdf59aea1"
+token_count: 137
+file_path: .ideate/principles/GP-05.yaml

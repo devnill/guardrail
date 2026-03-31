@@ -1,0 +1,28 @@
+id: module_spec-readme
+type: module_spec
+name: readme
+scope: |
+  Owns `README.md` — the user-facing documentation for the guardrail plugin.
+  
+  Responsible for:
+  - Explaining what guardrail does and why
+  - Usage instructions for both skills (`/guardrail init` and `/guardrail audit`)
+  - Explaining the stack/rule data model and how to extend it
+  - Documenting the project override mechanism (`.claude/guardrail/`)
+  - Listing included stacks and rule modules
+  - Installation instructions (marketplace and manual)
+  
+  NOT responsible for: skill behavior (that is defined in the skill files), data file content, plugin registration.
+provides:
+  - "**README.md** — Human-readable documentation. No other module depends on this file."
+requires:
+  - "Finalized skill names and descriptions (from: `init-skill`, `audit-skill`) — to document usage accurately."
+  - "Finalized stack list (from: `stack-data`) — to list included stacks."
+  - "Finalized rule list (from: `rule-data`) — to list included rule modules."
+  - "JSON schemas (from: architecture contracts) — to document the extension format."
+boundary_rules:
+  - Must not define behavior. The README describes what the skills do; it does not prescribe how.
+  - Must accurately reflect the current state of all other modules. If a module changes, the README must be updated.
+  - Must include installation instructions for both marketplace (`claude plugin add guardrail`) and manual (git clone) methods.
+content_hash: a0d3ca9d36c269bf13ffb413f244aae0fa519dbbacc417670b313c62f55d02fe
+token_count: 360

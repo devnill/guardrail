@@ -1,0 +1,11 @@
+id: GP-01
+type: guiding_principle
+name: Maximize Autonomy Within Safety Boundaries
+status: active
+description: The primary goal is reducing permission prompts by 80%+ while maintaining security against prompt injection and destructive commands. When a design decision involves a tradeoff between convenience and safety, prefer the option that achieves both — sandbox enforcement over permission prompts, generalized allowlists over specific ones. Only sacrifice convenience when there is no safe alternative.
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: "3f2e620eca2807fd512d659112c1bbf42ae8ec8485d59eccb08ac8b7f6fdd3a8"
+token_count: 158
+file_path: .ideate/principles/GP-01.yaml

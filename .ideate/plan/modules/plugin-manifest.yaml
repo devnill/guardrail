@@ -1,0 +1,24 @@
+id: module_spec-plugin-manifest
+type: module_spec
+name: plugin-manifest
+scope: |
+  Owns the plugin identity and registration files:
+  - `.claude-plugin/plugin.json` — plugin manifest consumed by Claude Code
+  - `.claude-plugin/marketplace.json` — marketplace registry entry
+  - `CLAUDE.md` — plugin-level instructions that Claude Code loads when the plugin is active
+  
+  NOT responsible for: skill content, data file content, user documentation (README).
+provides:
+  - "**plugin.json** — Registers the plugin name (`guardrail`), version, description, and declares two skills (`init` at `skills/init/SKILL.md`, `audit` at `skills/audit/SKILL.md`)."
+  - "**marketplace.json** — Provides the marketplace listing: name, description, author, repository URL, version, tags for discoverability."
+  - "**CLAUDE.md** — Plugin-level context instructions. Tells Claude about guardrail's purpose, where data files live (`${CLAUDE_PLUGIN_ROOT}/stacks/`, `${CLAUDE_PLUGIN_ROOT}/rules/`, `${CLAUDE_PLUGIN_ROOT}/sandbox/`), and the project override location (`.claude/guardrail/`)."
+requires:
+  - "Finalized skill names and paths (from: `init-skill`, `audit-skill`) — needed to populate the `skills` array in plugin.json."
+  - Plugin version number — determined at authoring time, not derived from another module.
+boundary_rules:
+  - Must not contain any behavioral logic. These are declarative registration files only.
+  - Must follow the established Claude Code plugin structure exactly.
+  - "`CLAUDE.md` provides orientation context only — it must not duplicate the skill instructions."
+  - Version in `plugin.json` and `marketplace.json` must match.
+content_hash: "6da78fe0bd99173d25932c6c43698ddec765a29bfc56ea961fa3cfe35b280279"
+token_count: 406

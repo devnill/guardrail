@@ -1,0 +1,14 @@
+id: P-01
+type: domain_policy
+domain: sandbox
+status: active
+derived_from:
+  - GP-1 (Maximize Autonomy Within Safety Boundaries)
+established: planning phase
+amended: null
+description: All generated configurations enable sandboxing with auto-allow mode. This is the primary mechanism for reducing permission prompts while maintaining OS-level enforcement.
+cycle_created: 1
+cycle_modified: null
+content_hash: "9526ab458c08d79f24cb701d370560f2e6d32c548121deb223883fb05c027a39"
+token_count: 114
+file_path: .ideate/policies/P-01.yaml

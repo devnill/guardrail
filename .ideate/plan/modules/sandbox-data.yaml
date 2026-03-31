@@ -1,0 +1,22 @@
+id: module_spec-sandbox-data
+type: module_spec
+name: sandbox-data
+scope: |
+  Owns `sandbox/default.json` — the default sandbox configuration template that init uses as the starting point for sandbox settings.
+  
+  NOT responsible for: per-stack sandbox overrides (those live in stack JSON files in `stack-data`), sandbox logic or merging (that is `init-skill`'s job), rule modules, plugin registration.
+provides:
+  - "**SandboxTemplate JSON** — A single file conforming to the SandboxTemplate schema:"
+  - "- `enabled: true` (sandbox on by default)"
+  - - `filesystem.allowWrite` and `filesystem.denyWrite` defaults
+  - - `network.allowedDomains` base array (empty — populated by stack merging)
+requires:
+  - Nothing. The sandbox template is a leaf node with no dependencies.
+boundary_rules:
+  - "Must contain exactly one file: `sandbox/default.json`."
+  - Must conform to the SandboxTemplate schema.
+  - "`enabled` must default to `true` (per interview decision)."
+  - "`network.allowedDomains` must start empty — domains are contributed by stack modules during merging."
+  - Must not contain stack-specific configuration. Stack sandbox overrides belong in `stack-data`.
+content_hash: cca410b9a4ed31e0e0758a710eb3374462c7f89b626d3a1974c4d4f4ec48a9c3
+token_count: 289

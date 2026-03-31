@@ -1,0 +1,30 @@
+id: module_spec-rule-data
+type: module_spec
+name: rule-data
+scope: |
+  Owns all files in `rules/` — the JSON data files that define cross-cutting (stack-independent) permission modules.
+  
+  Files:
+  - `rules/git.json` — Git version control operations
+  - `rules/web.json` — Web search and documentation fetching
+  - `rules/docker.json` — Docker/container operations
+  - `rules/mcp-ideate.json` — Ideate plugin MCP tool permissions
+  - `rules/mcp-cyberbrain.json` — Cyberbrain plugin MCP tool permissions
+  
+  NOT responsible for: stack definitions (`stacks/`), sandbox template, skill logic, plugin registration.
+provides:
+  - "**RuleModule JSON files** — Each file conforms to the RuleModule schema and provides:"
+  - - `name` and `description` for display
+  - - Optional `auto` flag (if true, always included without user prompt)
+  - - `permissions.allow` and optional `permissions.deny` arrays
+requires:
+  - Nothing. Rule data files are leaf nodes with no dependencies on other modules.
+boundary_rules:
+  - Every rule JSON file must conform to the RuleModule schema exactly.
+  - Rule files must not include `detect` blocks — they are not auto-detected from project files. Selection is via the interactive menu or the `auto` flag.
+  - Permission rule strings must use Claude Code's permission syntax.
+  - Deny rules in rule modules are safety-critical (e.g., git push --force, docker run --privileged). They must not be removed without understanding the security implications.
+  - Rule files must not reference other rule files. Each is self-contained.
+  - No executable logic — these are pure data files.
+content_hash: "3a92b6fbbe4c538e8d5f264fade92b3aae21a1fbd0716884f4821d1b925c4704"
+token_count: 398

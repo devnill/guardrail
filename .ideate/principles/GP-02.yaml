@@ -1,0 +1,11 @@
+id: GP-02
+type: guiding_principle
+name: Data-Driven, Not Code-Driven
+status: active
+description: Stack definitions, rule modules, and deny lists are JSON data files. Adding support for a new stack or rule set means adding a new JSON file, not modifying plugin logic. The skill reads and interprets data; it does not encode detection or classification logic in its own markdown. This keeps the system extensible without forking.
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: "04054ab7acd44d3cd9326dd809827eb3b29a196ae8eca5fe84928af03a565ac0"
+token_count: 137
+file_path: .ideate/principles/GP-02.yaml

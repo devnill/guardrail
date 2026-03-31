@@ -1,0 +1,17 @@
+id: interviews/plan/permissions
+type: interview
+cycle: null
+source_path: steering/interviews/plan/permissions.md
+entries:
+  - {id: IQ-000-001, question: Audit skill classification logic — pattern-based or prefix-based?, answer: "Core goal: minimize permission prompts while maintaining security against prompt injection and dangerous commands. Decision: prefix-based generalization with a safety deny list. Multiple specific rules sharing a common command prefix get consolidated. Commands where wildcarding is unsafe (rm, sudo, curl|sh) are on a deny list and never generalized.
+
+<!-- domains: permissions -->", domain: null, seq: 1}
+  - {id: IQ-000-002, question: Merge vs replace on existing settings?, answer: "Never clobber without permission. If conflicts exist, ask the user. Init only touches permissions and sandbox keys, leaves everything else untouched. Guardrail's job is to make smart suggestions to maximize productivity and safety, especially when current settings could be improved.
+
+<!-- domains: permissions -->", domain: null, seq: 2}
+  - {id: IQ-000-003, question: Audit scope — local only or global + local?, answer: "Both. Audit reads global and local as a combined effective ruleset. Reports risks and optimizations that affect the current project. Proposed fixes specify which file they'd modify and require explicit confirmation.
+
+<!-- domains: permissions -->", domain: null, seq: 3}
+  - {id: IQ-000-004, question: Deny list contents?, answer: Best effort for v1. Will iterate later if the project shows promise., domain: null, seq: 4}
+content_hash: "7ead661302ceab28b4f469fc354f1c92964accbcfa3a96bb96529f9be3d95ea3"
+token_count: 397

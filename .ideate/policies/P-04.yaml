@@ -1,0 +1,14 @@
+id: P-04
+type: domain_policy
+domain: permissions
+status: active
+derived_from:
+  - GP-3 (Never Clobber Without Permission)
+established: planning phase
+amended: null
+description: When writing to settings.local.json, guardrail reads the full file, modifies only `permissions` and `sandbox`, and writes back with all other keys preserved unchanged.
+cycle_created: 1
+cycle_modified: null
+content_hash: "89bb1a41d23cf8fec336c382aa0ac025668e0a4c9af9895285a593028ddef0b5"
+token_count: 111
+file_path: .ideate/policies/P-04.yaml

@@ -1,0 +1,11 @@
+id: interviews/plan/sandbox
+type: interview
+cycle: null
+source_path: steering/interviews/plan/sandbox.md
+entries:
+  - {id: IQ-000-001, question: Should init enable sandboxing by default or present it as opt-in?, answer: "Sandboxing enabled by default. Light touch with maximum security. Sandbox is a quick win for prompt reduction.
+
+<!-- domains: sandbox -->", domain: null, seq: 1}
+  - {id: IQ-000-002, question: Sandbox auto-allow mode — enabled by default?, answer: Yes, auto-allow in sandboxes by default. This is the biggest lever for reducing permission prompts., domain: null, seq: 2}
+content_hash: "94a387c57a60ce6d3fadccb385dd67ec2990e4d3626ed57c1a65743916bb36f6"
+token_count: 153

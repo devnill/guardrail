@@ -1,0 +1,11 @@
+id: GP-06
+type: guiding_principle
+name: Composable and Extensible
+status: active
+description: Multiple stacks and rule modules combine additively. Users can add custom modules in `.claude/guardrail/stacks/` and `.claude/guardrail/rules/` without touching the plugin. Third-party rule sets should work by dropping JSON files into the right directory.
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: "3061c5b36b77abd6ef89647f77949d654d1811053696928db3b2b6cc240228fc"
+token_count: 118
+file_path: .ideate/principles/GP-06.yaml

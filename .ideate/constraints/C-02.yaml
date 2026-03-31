@@ -1,0 +1,10 @@
+id: C-02
+type: constraint
+category: technology
+status: active
+description: No runtime dependencies beyond Claude Code. Stack detection, rule merging, and audit classification are performed inline by the skill using Claude Code's built-in tools (Glob, Read, Write, Edit). No external scripts, binaries, or interpreters required.
+cycle_created: 1
+cycle_modified: null
+content_hash: "83574fc1514fa8d710d14bd0de01e71430caa0906a4241ff8a58ac75ce7aa1a7"
+token_count: 107
+file_path: .ideate/constraints/C-02.yaml

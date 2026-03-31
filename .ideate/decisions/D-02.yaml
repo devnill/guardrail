@@ -1,0 +1,13 @@
+id: D-02
+type: domain_decision
+domain: sandbox
+status: settled
+cycle: 1
+supersedes: null
+description: "allowWrite: [\".\"] (project directory), denyWrite: [\"/.git\"] (git database)"
+rationale: Agents need to write files in the project but should not manipulate git internals directly
+cycle_created: 1
+cycle_modified: null
+content_hash: f09f7943594086e8738819cc159a94b538301a4b3fd767a29d72a03e7349a09d
+token_count: 96
+file_path: .ideate/decisions/D-02.yaml

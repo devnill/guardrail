@@ -1,0 +1,14 @@
+id: Q-02
+type: domain_question
+domain: sandbox
+status: open
+impact: Potential sandbox bypass if unix sockets are unrestricted
+source: steering/research/claude-code-permissions.md — sandbox limitations
+resolution: null
+resolved_in: null
+description: Should the default sandbox template restrict unix socket access? Research indicates unix sockets can enable sandbox escape.
+cycle_created: 1
+cycle_modified: null
+content_hash: "35a70fdb223419e0f0af567aed3eb72ec51213dde76280d81c5f144a80e6ba16"
+token_count: 119
+file_path: .ideate/questions/Q-02.yaml

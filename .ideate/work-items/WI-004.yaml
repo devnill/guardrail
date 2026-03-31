@@ -1,0 +1,58 @@
+id: WI-004
+type: work_item
+title: Create node.json, rust.json, go.json, shell.json stacks
+status: pending
+complexity: low
+scope: []
+depends: []
+blocks:
+  - "007"
+  - "008"
+criteria:
+  - All four stack JSON files exist and conform to StackModule schema
+  - node.json detects package.json, tsconfig.json, *.js, *.ts; allows node, npm, npx, yarn, pnpm, jest, vitest, eslint, prettier, tsc; network includes registry.npmjs.org
+  - rust.json detects Cargo.toml, *.rs; allows cargo, rustc, rustup, clippy, rustfmt; network includes crates.io, static.crates.io
+  - go.json detects go.mod, go.sum, *.go; allows go, gofmt, golint, golangci-lint; network includes proxy.golang.org, sum.golang.org
+  - shell.json detects Makefile, *.sh, justfile; allows make, just, bash, sh, shellcheck
+module: null
+domain: null
+notes: |
+  # 004: Create node.json, rust.json, go.json, shell.json stacks
+  
+  ## Implementation Notes
+  
+  ### node.json
+  
+  Detection: `package.json`, `tsconfig.json`, `*.js`, `*.ts`, `*.jsx`, `*.tsx`, `yarn.lock`, `pnpm-lock.yaml`
+  Allow: `node`, `npm`, `npx`, `yarn`, `pnpm`, `jest`, `vitest`, `eslint`, `prettier`, `tsc`, `tsx`, `next`, `vite`, `webpack`, `esbuild`, `turbo`
+  Network: `registry.npmjs.org`, `registry.yarnpkg.com`
+  
+  ### rust.json
+  
+  Detection: `Cargo.toml`, `Cargo.lock`, `*.rs`
+  Allow: `cargo`, `rustc`, `rustup`, `clippy`, `rustfmt`, `cargo-watch`, `cargo-nextest`
+  Network: `crates.io`, `static.crates.io`
+  
+  ### go.json
+  
+  Detection: `go.mod`, `go.sum`, `*.go`
+  Allow: `go`, `gofmt`, `goimports`, `golint`, `golangci-lint`, `staticcheck`
+  Network: `proxy.golang.org`, `sum.golang.org`
+  
+  ### shell.json
+  
+  Detection: `Makefile`, `*.sh`, `justfile`, `Taskfile.yml`
+  Allow: `make`, `just`, `bash`, `sh`, `shellcheck`, `shfmt`
+  No sandbox network (shell tools don't need external package registries).
+  
+  ### Common patterns across all four
+  
+  - All use `detect.match: "any"`
+  - All permission entries use `Bash(tool:*)` format
+  - None include deny rules (covered by `_base.json`)
+  - All are self-contained with no references to other stack files
+cycle_created: 1
+cycle_modified: null
+content_hash: d15a5b52350bcb2f13db08e685689a3e331e4693902c82d866c1150fc7c15daf
+token_count: 540
+file_path: .ideate/work-items/WI-004.yaml

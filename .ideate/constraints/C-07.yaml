@@ -1,0 +1,10 @@
+id: C-07
+type: constraint
+category: design
+status: active
+description: Settings output targets `.claude/settings.local.json`. Init writes only `permissions` and `sandbox` keys. All other keys in the file are preserved.
+cycle_created: 1
+cycle_modified: null
+content_hash: "0122b1558886517486ba44de3a3f8d270728e5427cea7e305b5a20be8275a6b7"
+token_count: 79
+file_path: .ideate/constraints/C-07.yaml

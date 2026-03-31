@@ -1,0 +1,11 @@
+id: GP-03
+type: guiding_principle
+name: Never Clobber Without Permission
+status: active
+description: Guardrail never silently overwrites existing configuration. When conflicts exist between generated and existing settings, the user is asked. When writing to `settings.local.json`, only the `permissions` and `sandbox` keys are touched — all other keys are preserved. Destructive changes require explicit confirmation.
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: d0f1912459c498f391a218cd3a9eb465c8e3f43ba8e401c5c64850a8e620e086
+token_count: 135
+file_path: .ideate/principles/GP-03.yaml

@@ -1,0 +1,14 @@
+id: P-02
+type: domain_policy
+domain: sandbox
+status: active
+derived_from:
+  - GP-5 (Defense in Depth)
+established: planning phase
+amended: null
+description: If sandboxing is unavailable (unsupported platform), the skill warns the user and should note that permission rules become the primary safety mechanism.
+cycle_created: 1
+cycle_modified: null
+content_hash: "21ff93e2f5214a49a7b75f573707641092d37f5731b3784a1450dfb697776c0a"
+token_count: 103
+file_path: .ideate/policies/P-02.yaml

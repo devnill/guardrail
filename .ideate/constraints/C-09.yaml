@@ -1,0 +1,10 @@
+id: C-09
+type: constraint
+category: process
+status: active
+description: Distributed via claude-marketplace. Plugin must be registered in the marketplace with proper `marketplace.json` and `plugin.json` manifests.
+cycle_created: 1
+cycle_modified: null
+content_hash: bbc5305b47fc3615a17d8892e6813d7d98bbe52263d7e2e91a8130496cee56cf
+token_count: 78
+file_path: .ideate/constraints/C-09.yaml

@@ -1,0 +1,11 @@
+id: J-000-012
+type: journal_entry
+phase: execute
+date: "2026-03-22"
+cycle_created: 0
+title: "Work item 010: Register plugin in claude-marketplace"
+content: |
+  Status: complete
+  Added guardrail entry to /Users/dan/code/claude-marketplace/.claude-plugin/marketplace.json. Note: the GitHub repo devnill/guardrail must be created and pushed before the marketplace entry will resolve.
+content_hash: f481cc1a8ff1f75075b370f0170d7cb283fba58a6420b21ffed4f93bf8d0a391
+token_count: 98

@@ -1,0 +1,10 @@
+id: C-08
+type: constraint
+category: design
+status: active
+description: "Git repo detection determines write location. In a git repo, write to project root's `.claude/settings.local.json`. Outside a git repo, confirm location with user (default: cwd)."
+cycle_created: 1
+cycle_modified: null
+content_hash: a472cd4788afe83fee604d0318b203a274c753beda8d631f236abb0d423910d4
+token_count: 87
+file_path: .ideate/constraints/C-08.yaml

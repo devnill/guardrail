@@ -1,0 +1,11 @@
+id: GP-08
+type: guiding_principle
+name: Iterate, Don't Perfect
+status: active
+description: "V1 ships with best-effort deny lists and common stack definitions. The plugin will be adversarially tested and refined. Design for iteration: make it easy to add stacks, update deny lists, and adjust defaults without structural changes."
+amendment_history: []
+cycle_created: 1
+cycle_modified: null
+content_hash: "46c8f3d01f8c738d7e03035da4b3e24d0ad693c76f1775b7cfaa3f67f3bea313"
+token_count: 112
+file_path: .ideate/principles/GP-08.yaml

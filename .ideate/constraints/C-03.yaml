@@ -1,0 +1,10 @@
+id: C-03
+type: constraint
+category: technology
+status: active
+description: macOS primary target. Sandbox configuration uses Seatbelt. Linux (bubblewrap) is a secondary target. Windows/WSL1 not supported for sandboxing.
+cycle_created: 1
+cycle_modified: null
+content_hash: "6996531ad4638e155c738e3aa7f77ea036dec6758a5e34a61e269ff7b90d588c"
+token_count: 79
+file_path: .ideate/constraints/C-03.yaml

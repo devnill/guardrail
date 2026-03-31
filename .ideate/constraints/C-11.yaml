@@ -1,0 +1,10 @@
+id: C-11
+type: constraint
+category: process
+status: active
+description: Interactive confirmation required. Init presents a menu for stack/rule selection before writing. Audit presents findings and offers fix-all, fix-one-by-one, or export-only modes. No silent writes.
+cycle_created: 1
+cycle_modified: null
+content_hash: "2a613df866ac3787767f6003e6a212184b15e63bcd6aa197c5a264e0a0a590c7"
+token_count: 92
+file_path: .ideate/constraints/C-11.yaml

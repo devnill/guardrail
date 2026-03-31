@@ -1,0 +1,9 @@
+id: J-000-004
+type: journal_entry
+phase: execute
+date: "2026-03-22"
+cycle_created: 0
+title: "Work item 002: Create _base.json stack"
+content: "Status: complete"
+content_hash: a343cdea0b18d67983da12e19f35c4e6b85e898e3e492388e48fd98182112b1e
+token_count: 43

@@ -1,0 +1,10 @@
+id: C-14
+type: constraint
+category: scope
+status: active
+description: No permission analytics or runtime monitoring. Guardrail is a configuration tool, not a runtime agent.
+cycle_created: 1
+cycle_modified: null
+content_hash: "378453a5c3355394d9ede1a736b47412c247189adc274dee3faebbc5932dec42"
+token_count: 68
+file_path: .ideate/constraints/C-14.yaml

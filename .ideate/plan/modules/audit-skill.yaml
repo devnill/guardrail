@@ -1,0 +1,28 @@
+id: module_spec-audit-skill
+type: module_spec
+name: audit-skill
+scope: |
+  Owns `skills/audit/SKILL.md` — the markdown skill file that Claude Code executes when the user invokes `/guardrail audit`.
+  
+  Responsible for:
+  - Reading global settings (`~/.claude/settings.json`) and local settings (`.claude/settings.local.json`)
+  - Building the combined effective ruleset
+  - Classifying each local permission rule into categories (generalizable, one-off, redundant, risky, clean)
+  - Presenting a categorized audit report
+  - Offering fix modes (fix-all, fix-one-by-one, export-only)
+  - Applying fixes to local settings with user confirmation
+  
+  NOT responsible for: stack/rule JSON content, init workflow, plugin registration, modifying global settings.
+provides:
+  - "**`/guardrail audit` skill** — A complete markdown instruction set that Claude follows to perform the audit workflow."
+requires:
+  - "**StackModule JSON files** (from: `stack-data`) — Read at runtime to identify known command patterns for generalization matching."
+  - "**RuleModule JSON files** (from: `rule-data`) — Read at runtime to identify known command patterns for generalization matching."
+boundary_rules:
+  - Must not modify global `~/.claude/settings.json`. Global settings are read-only for analysis.
+  - Must not write to any settings key other than `permissions`. Sandbox audit is informational only in v1.
+  - Must not silently remove or modify rules. All changes require explicit user confirmation.
+  - Must not hardcode classification patterns. Uses prefix-based generalization with a safety deny list loaded from data files.
+  - Must present global findings in a separate clearly-marked informational section.
+content_hash: "67cbf65eb8b01cba3cf8f6170650a8880599cf2dc5087f782ffc72b277f39342"
+token_count: 421

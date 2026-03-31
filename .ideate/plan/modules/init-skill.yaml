@@ -1,0 +1,31 @@
+id: module_spec-init-skill
+type: module_spec
+name: init-skill
+scope: |
+  Owns `skills/init/SKILL.md` — the markdown skill file that Claude Code executes when the user invokes `/guardrail init`.
+  
+  Responsible for:
+  - Stack detection by globbing project files against stack JSON detect patterns
+  - Loading and merging stack, rule, and sandbox data into a unified config
+  - Presenting an interactive selection menu to the user
+  - Detecting git repo to determine write location
+  - Reading existing settings.local.json and computing diffs
+  - Writing the merged permissions + sandbox config to settings.local.json
+  - Preserving non-guardrail keys in existing settings files
+  
+  NOT responsible for: the content of stack/rule/sandbox JSON files, audit logic, plugin registration.
+provides:
+  - "**`/guardrail init` skill** — A complete markdown instruction set that Claude follows to perform the init workflow. This is the skill file, not an API."
+requires:
+  - "**StackModule JSON files** (from: `stack-data`) — Read at runtime from `${CLAUDE_PLUGIN_ROOT}/stacks/*.json` and `.claude/guardrail/stacks/*.json`. Must conform to the StackModule schema."
+  - "**RuleModule JSON files** (from: `rule-data`) — Read at runtime from `${CLAUDE_PLUGIN_ROOT}/rules/*.json` and `.claude/guardrail/rules/*.json`. Must conform to the RuleModule schema."
+  - "**SandboxTemplate JSON** (from: `sandbox-data`) — Read at runtime from `${CLAUDE_PLUGIN_ROOT}/sandbox/default.json`. Must conform to the SandboxTemplate schema."
+boundary_rules:
+  - Must not hardcode permission rules, stack names, or detection patterns. All domain knowledge comes from JSON data files.
+  - Must not write to any settings key other than `permissions` and `sandbox`. All other keys in settings.local.json are preserved exactly.
+  - Must not silently overwrite existing configuration. If settings.local.json exists, must show a diff and ask before writing.
+  - Must not write to global `~/.claude/settings.json`.
+  - Must not execute external scripts or binaries. Stack detection uses Claude Code's built-in Glob tool.
+  - Project-scoped override files with the same name as a plugin-scoped file replace the plugin version entirely (no deep merge of same-name files).
+content_hash: "168e015ff8d438b9fee38ae60da59c979f554970fb76a3bd713351048ef50675"
+token_count: 552

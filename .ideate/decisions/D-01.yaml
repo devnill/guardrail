@@ -1,0 +1,13 @@
+id: D-01
+type: domain_decision
+domain: sandbox
+status: settled
+cycle: 1
+supersedes: null
+description: Generated sandbox configs use auto-allow mode where sandboxed Bash commands auto-approve without prompts
+rationale: This is the single biggest lever for reducing permission prompts. OS-level enforcement provides the safety net.
+cycle_created: 1
+cycle_modified: null
+content_hash: "93f8270311880b3b886b500ec51324e33efa299a43416c72ef91874c22e8adb7"
+token_count: 108
+file_path: .ideate/decisions/D-01.yaml

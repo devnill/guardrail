@@ -1,0 +1,10 @@
+id: C-01
+type: constraint
+category: technology
+status: active
+description: "Claude Code plugin format. Must follow the established plugin structure: `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, skills in `skills/`, using `${CLAUDE_PLUGIN_ROOT}` for self-referencing paths."
+cycle_created: 1
+cycle_modified: null
+content_hash: b18936cbbb4e37761fafd6b793b03f9f93582ac1e75aa4db7557270a32043d07
+token_count: 98
+file_path: .ideate/constraints/C-01.yaml

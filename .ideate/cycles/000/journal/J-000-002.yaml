@@ -1,0 +1,13 @@
+id: J-000-002
+type: journal_entry
+phase: plan
+date: "2026-03-22"
+cycle_created: 0
+title: Domain bootstrap complete
+content: |
+  Domains created: permissions, sandbox, plugin-system
+  Initial policies: 10 (across all domains)
+  Initial decisions: 7 (from planning phase)
+  Open questions: 5
+content_hash: a5fff898f9321faeb72cc9b03c0674acd59156aeff73348d20c44a7a29ed8881
+token_count: 75

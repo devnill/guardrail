@@ -1,0 +1,58 @@
+id: WI-003
+type: work_item
+title: Create python.json stack
+status: pending
+complexity: low
+scope: []
+depends: []
+blocks:
+  - "007"
+  - "008"
+criteria:
+  - stacks/python.json exists and contains valid JSON conforming to StackModule schema
+  - detect.files includes requirements.txt, pyproject.toml, setup.py, Pipfile, and *.py
+  - detect.match is 'any'
+  - "permissions.allow includes at least: python3, python, pip3, pip, pytest, mypy, ruff, black, isort, poetry, pdm, uv"
+  - sandbox.network.allowedDomains includes pypi.org and files.pythonhosted.org
+module: null
+domain: null
+notes: |
+  # 003: Create python.json stack
+  
+  ## Implementation Notes
+  
+  ### Detection patterns
+  ```json
+  "detect": {
+    "files": ["requirements.txt", "pyproject.toml", "setup.py", "setup.cfg", "Pipfile", "*.py", "poetry.lock", "uv.lock"],
+    "match": "any"
+  }
+  ```
+  
+  ### Permissions
+  
+  Allow rules for Python ecosystem tools:
+  - Interpreters: `python3`, `python`
+  - Package managers: `pip3`, `pip`, `poetry`, `pdm`, `uv`, `pipx`
+  - Test runners: `pytest`, `tox`, `nox`
+  - Linters/formatters: `mypy`, `ruff`, `black`, `isort`, `flake8`, `pylint`
+  - Build tools: `setuptools`, `build`, `twine`
+  - Virtual envs: `venv`, `virtualenv`
+  
+  All in `Bash(tool:*)` format.
+  
+  No deny rules — Python-specific dangerous patterns are covered by `_base.json`.
+  
+  ### Sandbox network
+  ```json
+  "sandbox": {
+    "network": {
+      "allowedDomains": ["pypi.org", "files.pythonhosted.org"]
+    }
+  }
+  ```
+cycle_created: 1
+cycle_modified: null
+content_hash: "4e931f2063e0c584e706db7121546e9f206f1b323cf6a82669567a998fe29b37"
+token_count: 397
+file_path: .ideate/work-items/WI-003.yaml

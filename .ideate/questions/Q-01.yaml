@@ -1,0 +1,14 @@
+id: Q-01
+type: domain_question
+domain: sandbox
+status: open
+impact: Sandbox misconfigurations could undermine the security model
+source: architecture design — scope boundary
+resolution: null
+resolved_in: null
+description: V1 audit only analyzes permission rules. Should it also analyze sandbox configuration (e.g., overly broad allowWrite, missing denyWrite for sensitive dirs)?
+cycle_created: 1
+cycle_modified: null
+content_hash: "67fc9da6082b1f3154e1d3c115aec2892c973030c5fd98797bcc8b0f2656851c"
+token_count: 121
+file_path: .ideate/questions/Q-01.yaml
